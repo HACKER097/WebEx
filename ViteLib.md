@@ -20,7 +20,7 @@ Here is the CSP: `Content-Security-Policy default-src 'self' openlibrary.org;img
 
 Ok, second (article)[https://book.hacktricks.xyz/pentesting-web/content-security-policy-csp-bypass/csp-bypass-self-+-unsafe-inline-with-iframes]
 
-Looks a but complicated, will come back to it.
+Looks a bit complicated, will come back to it.
 
 ## Links!
 
@@ -38,6 +38,20 @@ Looking at the book creation API request, it is an option! Just not part of the 
 
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/1798a084-1c54-4216-af20-1261e2c41006)
 
-Lets see what happens when we link to a sussy link.
+Lets see what happens when we link to a sussy link. THere is an opportunity of CSRF here. Set the link to a get request which might change the password, the link will be loaded whenever a user opens that image. 
 
+But that does not seem to be possible here, as the reset password button does nothing, and each user can only see their own books, except through linking the book's page. 
+
+**If I can get the link to work, it would be possible to send a book page link to a user, and when they open it, all their books are deleted. This is because delete endpoints takes get requests.**
+
+I tried using adding a link to the data, but got an error.
+
+![image](https://github.com/HACKER097/WebEx/assets/38581702/db5eca13-3aee-4c6d-8d6e-6eb8ee2505a8)
+
+This is very odd given that its the exact same request my browser made.
+
+I even tried hijacking the function that makes these requests normally, but got the same error. Really have no Idea why this wouldnt work.
+
+![image](https://github.com/HACKER097/WebEx/assets/38581702/59428dfd-f1ba-4f02-86cc-ac50b772cf0c)
+![image](https://github.com/HACKER097/WebEx/assets/38581702/157024ee-1a05-40f4-8be2-e6d0749ef2cd)
 
