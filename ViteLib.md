@@ -10,7 +10,7 @@ Sqlmap does not work because of a rate limit
 
 ## Content Security Policy
 
-Provided hint is an (article)[https://book.hacktricks.xyz/pentesting-web/content-security-policy-csp-bypass] about bypassing Content Security Policy.
+Provided hint is an [article](https://book.hacktricks.xyz/pentesting-web/content-security-policy-csp-bypass) about bypassing Content Security Policy.
 
 Its a way of preventing XXS, but there are some unsafe CSPs. This would mean I have to find which type of unsafe CSP this challange has, and exploit it.
 
@@ -18,7 +18,7 @@ Here is the CSP: `Content-Security-Policy default-src 'self' openlibrary.org;img
 
 `'unsafe-inline` is supposed to be unsafe, lets see how it can be exploited.
 
-Ok, second (article)[https://book.hacktricks.xyz/pentesting-web/content-security-policy-csp-bypass/csp-bypass-self-+-unsafe-inline-with-iframes]
+Ok, second [article](https://book.hacktricks.xyz/pentesting-web/content-security-policy-csp-bypass/csp-bypass-self-+-unsafe-inline-with-iframes)
 
 Looks a bit complicated, will come back to it.
 
