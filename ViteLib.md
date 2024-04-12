@@ -55,3 +55,23 @@ I even tried hijacking the function that makes these requests normally, but got 
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/59428dfd-f1ba-4f02-86cc-ac50b772cf0c)
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/157024ee-1a05-40f4-8be2-e6d0749ef2cd)
 
+## Content policy
+
+`'self' openlibrary.org;img-src 'self' raw.githubusercontent.com external-content.duckduckgo.com;base-uri`
+
+This is the content policy because of which I cannot add arbitrary links. Only links which follow this format are allowd. However this alone does not negate the posiblity of CSRF because links to the same domain are allowed regardless. 
+
+```js
+            !(
+                data.imageLink === "/assets/icons/bookshelf.svg" ||
+                data.imageLink.startsWith(
+                    "https://external-content.duckduckgo.com/iu/?u=https://covers.openlibrary.org/"
+                )
+            ) ||
+            !(
+                data.link === "" ||
+                data.link.startsWith("https://openlibrary.org//works/")
+            )
+```
+
+On API level, these are the lines which prevent us from sending a malacious url. No CSRF is possible
