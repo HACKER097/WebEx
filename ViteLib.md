@@ -74,4 +74,10 @@ This is the content policy because of which I cannot add arbitrary links. Only l
             )
 ```
 
-On API level, these are the lines which prevent us from sending a malacious url. No CSRF is possible
+On API level, these are the lines which prevent us from sending a malacious url. No CSRF is possible.
+
+## Styles
+
+OK this was a worthless tangent, lets get back to the initial hint, which is the `unsafe-inline` rule.
+
+We cannot add js, but are able to add inline styles.
