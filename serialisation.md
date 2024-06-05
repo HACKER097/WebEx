@@ -2,7 +2,7 @@
 
 Encoding: Translating data from one form to another. Only data can be encoded, if anyting other than data has to be encoded, it will have to be converted to data. Encoded data can be decoded anywhere if the encoding is known.
 
-Serialisation: Saving of an entire object with all of its methods, attributes, and their relationships along with data. Serialisation is only useful/readable to the language the serialised file was from.
+Serialisation: Saving of an entire object with all of its attributes, and their relationships along with data. Serialisation is only useful/readable to the language the serialised file was from.
 
 # research the various method to convert an object in memory to a file and then read that file back into an object in
 
