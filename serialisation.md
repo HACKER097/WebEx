@@ -177,7 +177,7 @@ public class Main {
 
 # 500 word short note on python pickle
 
-Pickle is a python library for serialisation. Pickle converts an object into a byte stream that contains all the necessary information to reconstruct the object in another Python session. There are 6 protocols in pickle. Here is a simplification.
+Pickle is a python library for serialisation. Pickle converts an object into a byte stream that contains all the necessary information to reconstruct the object in another Python session. There are 6 protocols in pickle. with each version adding new features and optimizations. Here is a simplification of the opcodes.
 
 * MARK ('('): Indicates the start of a new object or container.
 * STOP ('.'): Indicates the end of the pickle stream.
@@ -218,3 +218,22 @@ https://raw.githubusercontent.com/python/cpython/main/Lib/pickletools.py
 For eg `0x80` means we are using pickle protocal greater than 2.
 `0x95` Indicates the beginning of a new frame.
 and so on.
+
+```
+\x80\x04: Indicates that this pickle is using protocol 4.
+\x95\x1A\x00\x00\x00\x00\x00\x00\x00: Frame header indicating the length of the following data (0x1A = 26 bytes).
+\x5D: ] (MARK) opcode indicating the start of a list.
+\x94: STOP opcode.
+\x28: ( (TUPLE) opcode indicating the start of a tuple.
+\x4B\x01: Integer 1.
+\x4B\x02: Integer 2.
+\x7D: } (DICT) opcode indicating the start of a dictionary.
+\x94: STOP opcode.
+\x8C\x03\x63\x61\x74: Unicode string 'cat'.
+\x94: STOP opcode.
+\x8C\x05\x6D\x6F\x75\x73\x65: Unicode string 'mouse'.
+\x94: STOP opcode.
+\x73: s (SETITEM) opcode indicating setting a dictionary item.
+\x65: e (APPENDS) opcode for appending multiple items.
+\x2E: . (STOP) opcode indicating the end of the pickle stream.
+```
